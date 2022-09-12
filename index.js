@@ -23,21 +23,33 @@ const push = async function(log) {
     }
 }
 
-if (process.argv.length < 4) {
-    console.log('Usage:');
-    console.log('err0-import token.json log1 [log2 .. logN]');
-    return;
-}
-const token = JSON.parse(fs.readFileSync(process.argv[2]));
-for (const file of process.argv.slice(3)) {
-    const reader = new nReadlines(file);
-    let line;
-    while (line = reader.next()) {
-        const str = line.toString('utf-8');
-        const match = err0regex.exec(str);
-        if (match != null) {
-            await push(str);
+async function main() {
+    if (process.argv.length < 4) {
+        console.log('Usage:');
+        console.log('err0-import token.json log1 [log2 .. logN]');
+        return;
+    }
+    const token = JSON.parse(fs.readFileSync(process.argv[2]));
+    for (const file of process.argv.slice(3)) {
+        const reader = new nReadlines(file);
+        let line;
+        while (line = reader.next()) {
+            const str = line.toString('utf-8');
+            const match = err0regex.exec(str);
+            if (match != null) {
+                await push(str);
+            }
         }
     }
+    await flush();
 }
 
+main()
+    .then(() => {
+        process.exit(0)
+    })
+    .catch(err => {
+        console.error(err.message || err);
+        if (err.stack) console.error(err.stack);
+        process.exit(1);
+    });
