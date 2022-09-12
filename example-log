@@ -1,0 +1,4 @@
+log line not sent to err0
+[KUB-100] example log line
+[KUB-101] another example log line
+log line also not sent to err0
