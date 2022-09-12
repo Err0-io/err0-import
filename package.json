@@ -1,0 +1,24 @@
+{
+  "name": "err0-import",
+  "version": "1.0.0",
+  "description": "A tool for importing logs to err0",
+  "main": "index.js",
+  "bin": {
+    "err0-import": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.bluetrail.software:err0-io/err0-import.git"
+  },
+  "keywords": [
+    "err0"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "axios": "^0.27.2"
+  }
+}
