@@ -45,13 +45,7 @@ async function main() {
             if (match != null) {
                 await push({
                     error_code: match[1],
-                    ts: (new Date().getTime()),
-                    msg: str,
-                    metadata: {
-                        batch: {
-                            file: file
-                        }
-                    }
+                    ts: (new Date().getTime())
                 });
             }
         }
